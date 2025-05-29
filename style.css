@@ -1,0 +1,108 @@
+/* Import Roboto font from Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #f8f9fa 0%, #e3e6f3 100%);
+    color: #222;
+}
+
+header {
+    background: #4f8cff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 28px 0 18px 0;
+    text-align: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+header img {
+    width: 180px;
+    max-width: 90vw;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 4px 16px rgba(79,140,255,0.15);
+    transition: transform 0.3s;
+    content: url('https://upload.wikimedia.org/wikipedia/commons/2/2e/Jennie_for_Calvin_Klein_2023_%28cropped%29.png');
+}
+header img:hover {
+    transform: scale(1.05) rotate(-2deg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', Arial, sans-serif;
+    font-weight: 700;
+    color: #2d3a4b;
+    letter-spacing: 1px;
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 28px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.09);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+}
+img:hover {
+    box-shadow: 0 4px 24px rgba(79,140,255,0.18);
+}
+
+button, .btn {
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 12px;
+    box-shadow: 0 2px 8px rgba(79,140,255,0.08);
+}
+button:hover, .btn:hover {
+    background: #356ad8;
+    transform: translateY(-2px) scale(1.04);
+}
+
+a {
+    color: #4f8cff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #356ad8;
+    text-decoration: underline;
+}
+
+ul, ol {
+    padding-left: 24px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 12px;
+        margin: 10px;
+        border-radius: 8px;
+    }
+    header {
+        padding: 14px 0 10px 0;
+        border-bottom-left-radius: 16px;
+        border-bottom-right-radius: 16px;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+}
