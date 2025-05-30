@@ -76,6 +76,25 @@
       right: 20px;
       z-index: 1000;
     }
+
+    #profile-pic {
+    border-color: #333;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* fallback */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    #profile-pic {
+      border-color: #ffffff33;
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    #profile-pic {
+      border-color: #00000033;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
   </style>
 </head>
 <body>
@@ -112,7 +131,8 @@
             <a class="nav-link" href="#portofolio">Portofolio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a>
+            <!-- <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contact</a> -->
+            <a class="nav-link" href="#contact">Contact</a>
           </li>
         </ul>
       </div>
@@ -131,8 +151,8 @@
     <div class="container">
       <h2 id="about" class="text-center mb-4">About Me</h2>
       <div class="row align-items-center">
-        <div class="col-md-6">
-          <img src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mikel working at his desk" class="about-img">
+        <div class="col-md-6 align-items-end d-flex justify-content-end">
+          <img src="https://images.unsplash.com/photo-1654110455429-cf322b40a906?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Mikel working at his desk" class="about-img rounded-circle img-fluid border border-3 shadow" id="profile-pic" style="max-width: 300px; margin-bottom: 20px;">
         </div>
         <div class="col-md-6">
           <p>I’m a passionate web developer with a knack for creating beautiful and functional websites. Whether it's front-end magic or back-end logic, I love building things that make an impact.</p>
@@ -189,6 +209,50 @@
   
 
   <!-- Modal -->
+  <section class="container my-5">
+    <h2 id="contact" class="text-center mb-4">Keep in touch</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4 mb-md-0 d-flex flex-column align-items-center">
+        <div class="text-start w-100" style="max-width: 320px;">
+          <div><h2>Find me Mikel Ws</h2></div>
+          <div><strong>Alamat:</strong> Jl. Dummy No. 123</div>
+          <div><strong>Kota:</strong> Makassar</div>
+          <div><strong>Provinsi:</strong> Sulawesi Selatan</div>
+        </div>
+        <br>
+        <button class="btn btn-primary btn-lg mb-3" data-bs-toggle="modal" data-bs-target="#contactModal">
+          Contact Me
+        </button>
+      </div>
+      <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+        <div style="width:100%; min-height:300px;">
+          <!-- Leaflet Map -->
+          <div id="customMap" style="width: 100%; height: 300px; border-radius:8px;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var map = L.map('customMap').setView([-4.009, 119.627], 7); // Sulawesi Selatan approx center
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      var marker = L.marker([-4.009, 119.627]).addTo(map);
+      marker.bindTooltip("My Place", {permanent: false, direction: "top"});
+      marker.on('click', function() {
+        marker.openTooltip();
+      });
+      map.on('click', function() {
+        marker.closeTooltip();
+      });
+    });
+  </script>
+
+  <!-- Contact Modal -->
   <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
