@@ -2,77 +2,66 @@
 <html>
 <head>
   <title>Halaman Portofolio</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
   <!-- Section 1: Menu -->
-  <table border="1" width="100%" id="section1">
-    <tr>
-      <td align="center"><b>Header</b></td>
-      <td align="center"><b>About me</b></td>
-      <td align="center"><b>Portofolio</b></td>
-    </tr>
-  </table>
-  <br>
+  <nav id="section1" class="menu">
+    <ul>
+      <li><a href="#header">Header</a></li>
+      <li><a href="#about">About me</a></li>
+      <li><a href="#portfolio">Portofolio</a></li>
+    </ul>
+  </nav>
 
   <!-- Section 2: Judul di kiri dan gambar di kanan -->
-  <table border="1" width="100%" id="section2">
-    <tr>
-      <td width="50%">
-        <h2>Selamat Datang di Website saya</h2>
-        <p>Ini adalah contoh header dengan dua kolom, ada teks dan ada gamber.</p>
-        <button>Pelajari lebih lanjut</button>
-    </td>
-      <td width="50%" align="center" valign="middle">
-        <img src="https://placehold.co/600x200" alt="Gambar Ilustrasi">
-      </td>
-    </tr>
-  </table>
-  <br>
+  <section id="header" class="hero">
+    <div class="hero-text">
+      <h2>Selamat Datang di Website saya</h2>
+      <p>Ini adalah contoh header dengan dua kolom, ada teks dan ada gambar.</p>
+      <button>Pelajari lebih lanjut</button>
+    </div>
+    <div class="hero-image">
+      <img src="https://placehold.co/600x200" alt="Gambar Ilustrasi">
+    </div>
+  </section>
 
   <!-- Section 3: Biodata dengan 6 box -->
-  <table border="1" width="100%" id="section3">
-    <tr>
-      <td colspan="3" align="center">
-        <h2>About Me</h2>
-        <small>Saya adalah seorang web developer yang suka belajar hal baru dan bersemangat dalam mengembangkan aplikasi web.</small>
-      </td>
-    </tr>
-    <tr>
-      <td><b>Nama:</b> John Doe</td>
-      <td><b>Umur:</b> 25</td>
-      <td><b>Alamat:</b> Jakarta</td>
-    </tr>
-    <tr>
-      <td><b>Email:</b> john@example.com</td>
-      <td><b>Telepon:</b> 08123456789</td>
-      <td><b>Hobi:</b> Membaca</td>
-    </tr>
-  </table>
-  <br>
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <small>Saya adalah seorang web developer yang suka belajar hal baru dan bersemangat dalam mengembangkan aplikasi web.</small>
+    <div class="biodata">
+      <div class="biodata-item"><b>Nama:</b> John Doe</div>
+      <div class="biodata-item"><b>Umur:</b> 25</div>
+      <div class="biodata-item"><b>Alamat:</b> Jakarta</div>
+      <div class="biodata-item"><b>Email:</b> john@example.com</div>
+      <div class="biodata-item"><b>Telepon:</b> 08123456789</div>
+      <div class="biodata-item"><b>Hobi:</b> Membaca</div>
+    </div>
+  </section>
 
   <!-- Section 4: Portofolio -->
-  <table border="1" width="100%" id="section4">
-    <tr>
-        <td colspan="3" align="center"><h2>Proyek Saya</h2></td>
-    </tr>
-    <tr>
-      <td align="center">
+  <section id="portfolio" class="portfolio">
+    <h2>Proyek Saya</h2>
+    <div class="portfolio-list">
+      <div class="portfolio-item">
         <p><b>Proyek 1</b></p>
         <img src="https://placehold.co/200x200" alt="Proyek 1">
         <p>Deskripsi proyek 1</p>
-      </td>
-      <td align="center">
+      </div>
+      <div class="portfolio-item">
         <p><b>Proyek 2</b></p>
         <img src="https://placehold.co/200x200" alt="Proyek 2">
         <p>Deskripsi proyek 2</p>
-      </td>
-      <td align="center">
+      </div>
+      <div class="portfolio-item">
         <p><b>Proyek 3</b></p>
         <img src="https://placehold.co/200x200" alt="Proyek 3">
         <p>Deskripsi proyek 3</p>
-      </td>
-    </tr>
-  </table>
+      </div>
+    </div>
+  </section>
+
 </body>
 </html>

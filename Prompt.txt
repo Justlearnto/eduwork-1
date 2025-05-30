@@ -1,0 +1,11 @@
+
+1.
+Buatkan saya kode html yang memuat tentang: section 1 menu
+section 2 judul dikiri dan gambar dikanan
+section 3 Biodata dengan 6 box
+section 4 portofolio
+menggunakan html table tanpa css
+
+2.Landing page
+Buatkan saya landing page  profile pribadi dengan menggunakan html, css dan bootstrap. dan atur juga responsivenya. tambahkan komponen seperti modal, carousel, efek hover dan atur juga warna dan gambarnya
+
