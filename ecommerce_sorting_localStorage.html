@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Toko Online Keren</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .produk-container { display: flex; flex-wrap: wrap; gap: 15px; }
+    .produk {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      width: 200px;
+    }
+    .produk img { width: 100%; }
+    .produk button {
+      margin-top: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .produk button:hover { background-color: #218838; }
+    .controls input, .controls select {
+      margin-right: 10px;
+      padding: 5px;
+    }
+    .keranjang-popup {
+      position: fixed;
+      right: 20px;
+      top: 20px;
+      background: #f8f9fa;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 6px;
+      width: 250px;
+      z-index: 1000;
+    }
+    .keranjang-popup h3 { margin-top: 0; }
+    .keranjang-popup ul { padding-left: 20px; }
+    .keranjang-popup button {
+      background-color: #dc3545;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Toko Online Keren</h1>
+
+  <div class="controls">
+    <input type="text" id="search-nama" placeholder="Cari produk..." onkeyup="filterProduk()">
+    <select id="filter-kategori" onchange="filterProduk()">
+      <option value="Semua">Semua Kategori</option>
+      <option value="Pakaian">Pakaian</option>
+      <option value="Sepatu">Sepatu</option>
+      <option value="Aksesoris">Aksesoris</option>
+    </select>
+    <select id="sort-harga" onchange="filterProduk()">
+      <option value="none">Urutkan Harga</option>
+      <option value="asc">Termurah</option>
+      <option value="desc">Termahal</option>
+    </select>
+    <button onclick="tampilkanKeranjang()">🛒 Lihat Keranjang (<span id="jumlah-keranjang">0</span>)</button>
+    <span id="total-belanja" style="margin-left: 10px;"><strong>Total: Rp 0</strong></span>
+  </div>
+
+  <div id="produk-container" class="produk-container"></div>
+  <div id="popup-keranjang" class="keranjang-popup" style="display:none;"></div>
+
+  <script>
+    const produk = [
+      { nama: "Kaos Polos", harga: 50000, deskripsi: "Kaos polos nyaman.", gambar: "https://via.placeholder.com/150", kategori: "Pakaian" },
+      { nama: "Sepatu Sneakers", harga: 250000, deskripsi: "Sepatu keren.", gambar: "https://via.placeholder.com/150", kategori: "Sepatu" },
+      { nama: "Topi Trucker", harga: 70000, deskripsi: "Topi stylish.", gambar: "https://via.placeholder.com/150", kategori: "Aksesoris" },
+      { nama: "Jaket Hoodie", harga: 150000, deskripsi: "Untuk udara dingin.", gambar: "https://via.placeholder.com/150", kategori: "Pakaian" }
+    ];
+
+    let keranjang = JSON.parse(localStorage.getItem("keranjang")) || [];
+
+    function simpanKeranjang() {
+      localStorage.setItem("keranjang", JSON.stringify(keranjang));
+      document.getElementById("jumlah-keranjang").innerText = keranjang.length;
+      updateTotalBelanja();
+    }
+
+    function updateTotalBelanja() {
+      const total = keranjang.reduce((sum, item) => sum + item.harga, 0);
+      document.getElementById("total-belanja").innerHTML = `<strong>Total: Rp ${total.toLocaleString()}</strong>`;
+    }
+
+    function tampilkanProduk(data) {
+      const container = document.getElementById("produk-container");
+      container.innerHTML = "";
+      data.forEach(item => {
+        container.innerHTML += `
+          <div class="produk">
+            <img src="${item.gambar}" alt="${item.nama}">
+            <h3>${item.nama}</h3>
+            <p>${item.deskripsi}</p>
+            <p><strong>Rp ${item.harga.toLocaleString()}</strong></p>
+            <p><em>${item.kategori}</em></p>
+            <button onclick="tambahKeKeranjang('${item.nama}')">+ Tambah ke Keranjang</button>
+          </div>
+        `;
+      });
+    }
+
+    function tambahKeKeranjang(namaProduk) {
+      const item = produk.find(p => p.nama === namaProduk);
+      if (item) {
+        keranjang.push(item);
+        alert(`${item.nama} ditambahkan ke keranjang.`);
+        simpanKeranjang();
+      }
+    }
+
+    function tampilkanKeranjang() {
+      const popup = document.getElementById("popup-keranjang");
+      if (popup.style.display === "none") {
+        let html = "<h3>Keranjang</h3><ul>";
+        let total = 0;
+
+        keranjang.forEach((item, i) => {
+          html += `<li>${item.nama} - Rp ${item.harga.toLocaleString()} <button onclick="hapusItem(${i})">❌</button></li>`;
+          total += item.harga;
+        });
+
+        html += `</ul><p><strong>Total: Rp ${total.toLocaleString()}</strong></p>`;
+        html += `<button onclick="checkout()">Checkout</button>`;
+        popup.innerHTML = html;
+        popup.style.display = "block";
+      } else {
+        popup.style.display = "none";
+      }
+    }
+
+    function hapusItem(index) {
+      keranjang.splice(index, 1);
+      simpanKeranjang();
+      tampilkanKeranjang();
+    }
+
+    function checkout() {
+      if (keranjang.length === 0) return alert("Keranjang kosong!");
+      alert("Terima kasih! Pesanan Anda sedang diproses.");
+      keranjang = [];
+      simpanKeranjang();
+      tampilkanKeranjang();
+    }
+
+    function filterProduk() {
+      let hasil = [...produk];
+      const keyword = document.getElementById("search-nama").value.toLowerCase();
+      const kategori = document.getElementById("filter-kategori").value;
+      const sort = document.getElementById("sort-harga").value;
+
+      if (keyword) hasil = hasil.filter(p => p.nama.toLowerCase().includes(keyword));
+      if (kategori !== "Semua") hasil = hasil.filter(p => p.kategori === kategori);
+      if (sort === "asc") hasil.sort((a, b) => a.harga - b.harga);
+      else if (sort === "desc") hasil.sort((a, b) => b.harga - a.harga);
+
+      tampilkanProduk(hasil);
+    }
+
+    // Init
+    tampilkanProduk(produk);
+    simpanKeranjang();
+  </script>
+
+</body>
+</html>

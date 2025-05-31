@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JS</title>
+</head>
+<body>
+    <header id="header"></header>
+        <h1>Test JavaScript</h1>
+    <p id="message">This is a test message.</p>
+    <button id="changeMessageButton">Change Message</button>
+    <br>
+    <br>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <input type="text" id="emailInput" placeholder="Enter your email">
+    <button onclick="validateForm()">Submit</button>
+
+    <script>
+        document.getElementById('changeMessageButton').addEventListener('click', function() {
+            document.getElementById('message').textContent = 'The message has been changed!';
+        });
+
+        for (let i = 0; i < 5; i++) {
+            console.log('This is log number ' + (i + 1));
+        }
+        
+        let name = 'John Doe in let js';
+        function greet(name) {
+            return 'Hello, func ' + name + '!';
+        }
+        console.log(greet(name));
+        
+        const greeting = (name) => 'Hello, const ' + name + '!';
+        console.log(greeting(name));
+
+        let fruits = ['apple', 'banana', 'cherry'];
+        fruits.forEach((fruit, index) => {
+            console.log(`Fruit ${index + 1}: ${fruit}`);
+        });
+        console.log('jumlah array: ' + fruits.length); // Output the length of the array
+        console.log('semua isi array:', fruits); // Cetak semua array dalam console
+
+        console.log('access first element, '+ fruits[0]); // Accessing the first element of the array
+        console.log('access first element, '+ fruits[1]); // Accessing the second element of the array
+
+        fruits.push('Orange'); // Adding a new element to the array
+        console.log('semua isi array:', fruits); // Cetak semua array dalam console
+        fruits.pop(); // Removing the last element from the array
+        console.log('semua isi array setelah hapus -> pop:', fruits); // Cetak semua array dalam console
+
+        fruits.forEach((fruit, index) => console.log(fruit));
+        for (let fruit of fruits) {
+            console.log('Hasil For'+fruit);
+        }
+
+        document.getElementById('header').style.backgroundColor = 'lightgrey';
+        document.getElementById('header').innerText = 'Ini ditampilkan di id=header by js';
+
+        function validateForm() {
+            const nameInput = document.getElementById('nameInput').value.trim();
+            const emailInput = document.getElementById('emailInput').value.trim();
+            const customAlert = document.createElement('div');
+            customAlert.style.position = 'fixed';
+            customAlert.style.top = '50%';
+            customAlert.style.left = '50%';
+            customAlert.style.transform = 'translate(-50%, -50%)';
+            customAlert.style.background = '#fff';
+            customAlert.style.border = '1px solid #ccc';
+            customAlert.style.padding = '20px';
+            customAlert.style.zIndex = '1000';
+            customAlert.style.boxShadow = '0 2px 8px rgba(0,0,0,0.2)';
+            customAlert.style.fontFamily = 'Arial, sans-serif';
+
+            let message = '';
+            if (nameInput === '' && emailInput === '') {
+                message = 'Name and Email cannot be empty!';
+            } else if (nameInput === '') {
+                message = 'Name cannot be empty!';
+            } else if (emailInput === '') {
+                message = 'Email cannot be empty!';
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput)) {
+                message = 'Please enter a valid email address!';
+            } else {
+                message = 'Form submitted successfully!';
+            }
+            customAlert.textContent = message;
+
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'OK';
+            closeBtn.style.marginLeft = '20px';
+            closeBtn.onclick = function() {
+                document.body.removeChild(customAlert);
+            };
+            customAlert.appendChild(closeBtn);
+
+            document.body.appendChild(customAlert);
+
+            return false; // Prevent form submission/page reload
+        }
+     </script>
+    
+</body>
+</html>

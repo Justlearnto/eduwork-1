@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Produk E-Commerce</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .produk {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin: 10px;
+      padding: 10px;
+      width: 200px;
+    }
+    .produk img {
+      width: 100%;
+    }
+    .produk-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Daftar Produk</h1>
+
+  <label for="filter-kategori">Filter berdasarkan kategori:</label>
+  <select id="filter-kategori" onchange="filterProduk()">
+    <option value="Semua">Semua</option>
+    <option value="Pakaian">Pakaian</option>
+    <option value="Sepatu">Sepatu</option>
+    <option value="Aksesoris">Aksesoris</option>
+  </select>
+
+  <div id="produk-container" class="produk-container"></div>
+
+  <script>
+    const produk = [
+      {
+        nama: "Kaos Polos",
+        harga: 50000,
+        deskripsi: "Kaos polos nyaman untuk sehari-hari.",
+        gambar: "https://via.placeholder.com/150",
+        kategori: "Pakaian"
+      },
+      {
+        nama: "Sepatu Sneakers",
+        harga: 250000,
+        deskripsi: "Sepatu keren buat nongkrong.",
+        gambar: "https://via.placeholder.com/150",
+        kategori: "Sepatu"
+      },
+      {
+        nama: "Topi Trucker",
+        harga: 70000,
+        deskripsi: "Topi stylish buat jalan-jalan.",
+        gambar: "https://via.placeholder.com/150",
+        kategori: "Aksesoris"
+      }
+    ];
+
+    function tampilkanProduk(data) {
+      const container = document.getElementById("produk-container");
+      container.innerHTML = "";
+
+      data.forEach(item => {
+        container.innerHTML += `
+          <div class="produk">
+            <img src="${item.gambar}" alt="${item.nama}">
+            <h3>${item.nama}</h3>
+            <p>${item.deskripsi}</p>
+            <p><strong>Rp ${item.harga.toLocaleString()}</strong></p>
+            <p><em>${item.kategori}</em></p>
+          </div>
+        `;
+      });
+    }
+
+    function filterProduk() {
+      const kategori = document.getElementById("filter-kategori").value;
+      if (kategori === "Semua") {
+        tampilkanProduk(produk);
+      } else {
+        const hasil = produk.filter(p => p.kategori === kategori);
+        tampilkanProduk(hasil);
+      }
+    }
+
+    // Tampilkan semua produk saat halaman pertama kali dibuka
+    tampilkanProduk(produk);
+  </script>
+
+</body>
+</html>
